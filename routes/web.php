@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//La rotta principale fa riferimento alla
+//funzione inddex in PagesController
+Route::get('/', 'PagesController@index');
+
+//About route
+Route::get('/about', 'PagesController@about');
+
+//Services route
+Route::get('/services', 'PagesController@services');
