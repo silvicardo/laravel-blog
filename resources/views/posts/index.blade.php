@@ -5,6 +5,7 @@
   <h1>Posts</h1>
 
   @if(count($posts) > 0)
+
     @foreach($posts as $post)
 
     <div class="card my-5">
@@ -17,11 +18,14 @@
       </div>
     </div>
 
-
-
     @endforeach
+    {{--  paginazione --}}
+    {{ $posts->links() }}
+
   @else
+
     <p>No Posts found</p>
+
   @endif
 
 @endsection

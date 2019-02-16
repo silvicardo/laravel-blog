@@ -28,7 +28,19 @@ class PostsController extends Controller
     {
         //nomeModel::funzione Eloquent
         //all() reperisce tutti i record
-        $posts = Post::all();
+        //$posts = Post::all();
+
+        //ordiniamo per titolo in ordine discendente
+        //post più recenti in cima
+        // $posts = Post::orderBy('title', 'desc')->get();
+
+        //PAGINAZIONE
+        //invece di get richiamiamo paginate(nrElementiPerPagina)
+
+        $posts = Post::orderBy('title', 'desc')->paginate(10);
+        //aggiungere nella pagina di destinazione
+        // {{ $posts-links() }}   per mostrare i link
+
         //rimandiamo alla pagina index
         return view('posts.index', compact('posts'));
     }
