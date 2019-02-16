@@ -20,3 +20,10 @@ Route::get('/about', 'PagesController@about');
 
 //Services route
 Route::get('/services', 'PagesController@services');
+
+//grazie a questa riga, eseguendo php artisan route:list
+//creerà tutte le routes come da funzioni del controller selezionato
+//senza necessità di scriverle esplicitamente
+//Route::resource('posts','PostsController');
+
+Route::resource('posts', 'PostsController');
