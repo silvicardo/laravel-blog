@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+//per evitare problemi durante la migrazione con le stringhe
+//aggiungere questa Facade
+use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //impostiamo una lunghezza  per i Dati
+        //di tipo string del model
+        Schema::defaultStringLength(191);
     }
 
     /**
