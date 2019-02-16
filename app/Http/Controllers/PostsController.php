@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
+//per accedere al Model Post.php
+//usiamo il suo namespace (App) e il nome della classe (Post)
+//ATTENZIONE!!!!!!
+//quando si inseriscono i dati del db in env.php potrebbe
+//essere necessario al fine di effettuare query con Eloquent
+//rilanciare php artisan serve
+use App\Post;
 
 //il comando
 //php artisan make:controller nomeController --resource
@@ -20,7 +26,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        //nomeModel::funzione Eloquent
+        //all() reperisce tutti i record
+        $posts = Post::all();
+        //rimandiamo alla pagina index
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -52,7 +62,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $postAtId = Post::find($id);
+
+        return view('posts.show')->with('post',$postAtId);
     }
 
     /**
