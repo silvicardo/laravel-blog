@@ -37,7 +37,8 @@ class PostsController extends Controller
         //PAGINAZIONE
         //invece di get richiamiamo paginate(nrElementiPerPagina)
 
-        $posts = Post::orderBy('title', 'desc')->paginate(10);
+        // $posts = Post::orderBy('title', 'desc')->paginate(10);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         //aggiungere nella pagina di destinazione
         // {{ $posts-links() }}   per mostrare i link
 
@@ -72,7 +73,17 @@ class PostsController extends Controller
           'body' => 'required'
         ]);
 
-        return 'post ok';
+        //creazione di un post dalla classe Post
+        //abbinando i relativi dati della request
+        $post = new Post;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save(); //salvataggio nel db
+
+        //effettuiamo un redirect alla pagina, includendo con
+        //with un messaggio di riscontro
+        //apparirà nella sezione curata da views/includes/messages.blade.php
+        return redirect('/posts')->with('success','Post created');
     }
 
     /**
