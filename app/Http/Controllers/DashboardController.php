@@ -16,6 +16,10 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
+        //il costruttore della classe richiama il
+        //middleware per l'autenticazione, così facendo ogni
+        //Contenuto non appartenente all'utente corrente
+        //sarà bloccato
         $this->middleware('auth');
     }
 

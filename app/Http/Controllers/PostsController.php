@@ -19,6 +19,26 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+      /**
+       * Create a new controller instance.
+       *
+       * @return void
+       */
+      public function __construct()
+      {
+          //il costruttore della classe richiama il
+          //middleware per l'autenticazione, così facendo ogni
+          //Contenuto non appartenente all'utente corrente
+          //sarà bloccato
+          //il secondo parametro è un array passato
+          //al middleware, in questo caso di viste in
+          //cui il controllo non deve essere applicato
+          //la index e la show devono essere visibili da TUTTI
+
+          $this->middleware('auth', ['except' => ['index','show']]);
+      }
+
     /**
      * Display a listing of the resource.
      *
@@ -112,6 +132,15 @@ class PostsController extends Controller
       //la stessa azione di show, ma verso la pagina edit
       $postAtId = Post::find($id);
 
+      //controlliamo che l'id dell'utente corrente corrisponda
+      //a post->user_id, se non corrisponde redirect con errore
+      //a posts
+
+      if (auth()->user()->id !== $postAtId->user_id) {
+        return redirect('/posts')->with('error', 'Unauthorized Page!');
+      }
+
+      //altrimenti vai alla pagina edit passando l'id
       return view('posts.edit')->with('post',$postAtId);
     }
 
@@ -158,6 +187,16 @@ class PostsController extends Controller
     {
       //cancellazione di un post da id
       $post = Post::find($id);
+      //controlliamo che l'id dell'utente corrente corrisponda
+      //a post->user_id, se non corrisponde redirect con errore
+      //a posts
+
+      if (auth()->user()->id !== $postAtId->user_id) {
+        return redirect('/posts')->with('error', 'Unauthorized Deletion attempt!');
+      }
+
+      //UTENTE APPROVATO PROCEDIAMO ALLA CANCELLAZIONE
+
       $post->delete();
 
       //effettuiamo un redirect alla pagina, includendo con

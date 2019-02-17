@@ -14,16 +14,21 @@
       <small>Written on  {{ $post->created_at }} by {{ $post->user->name }}</small>
       </div>
     </div>
+    {{-- doppio controllo per i buttons edit e delete --}}
+    {{-- l'utente NON deve essere guest --}}
+    @if(!Auth::guest())
+      {{-- l'utente corrente deve avere lo stesso id registrato sotto user_id nel post corrente --}}
+      @if(Auth::user()->id == $post->user_id)
+        {{-- Bottone per la modifica della pagina --}}
+        <a href="/posts/{{ $post->id }}/edit" class="btn btn-lg btn-default btn-outline-secondary">Edit this Post</a>
 
-    {{-- Bottone per la modifica della pagina --}}
-    <a href="/posts/{{ $post->id }}/edit" class="btn btn-lg btn-default btn-outline-secondary">Edit this Post</a>
+        {{-- FORM PER LA CANCELLAZIONE, DELETE REQUEST --}}
+        {{-- Richiamo alla funzione destroy in PostsController, mandangogli l'id --}}
+        {!! Form::open(['action' => ['PostsController@destroy', $post->id], 'method'=> 'POST', 'class' => 'float-right']) !!}
 
-    {{-- FORM PER LA CANCELLAZIONE, DELETE REQUEST --}}
-    {{-- Richiamo alla funzione destroy in PostsController, mandangogli l'id --}}
-    {!! Form::open(['action' => ['PostsController@destroy', $post->id], 'method'=> 'POST', 'class' => 'float-right']) !!}
-
-      {{-- per effetturare una DELETE request laravel fornisce questo metodo --}}
-      {{ Form::hidden('_method', 'DELETE')}}
-      {{ Form::submit('Delete this post',['class' => 'btn btn-lg btn-danger'])}}
-
+        {{-- per effetturare una DELETE request laravel fornisce questo metodo --}}
+        {{ Form::hidden('_method', 'DELETE')}}
+        {{ Form::submit('Delete this post',['class' => 'btn btn-lg btn-danger'])}}
+      @endif
+    @endif
 @endsection
