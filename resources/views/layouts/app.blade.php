@@ -19,7 +19,10 @@
           presente in tutte le pagine
          --}}
          <div class="container">
-           @yield('content')
+          {{-- include della porzione per gestione errori --}}
+          @include('includes.messages')
+          {{-- praticamente ciò che viene creato in ogni pagina, il contenuto --}}
+          @yield('content')
          </div>
 
 

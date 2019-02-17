@@ -8,7 +8,7 @@
     {{-- https://laravelcollective.com/docs/master/html --}}
     {{-- per ogni form inseriamo una label e un campo --}}
     {{-- label(attributo for del tag , testo nel tag) --}}
-    {{-- text input: (attributo name, attributo value, array(classi, placeholder,...)) --}}
+    {{-- text/textarea input: (attributo name, attributo value, array(classi, placeholder,...)) --}}
     {{-- il form innesca una POST request, facendo riferimento alla funzione store in PostsController --}}
 
     {!! Form::open(['action' => 'PostsController@store', 'method'=> 'POST']) !!}

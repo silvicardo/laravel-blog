@@ -63,7 +63,16 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // validazione con il metodo validate
+        //primo parametro i dati della request
+        //secondo parametro: array parametri
+        $this->validate($request, [
+          'title' => 'required',
+          'body' => 'required'
+        ]);
+
+        return 'post ok';
     }
 
     /**
