@@ -9,7 +9,8 @@
         <h1>{{ $post->title }}</h1>
       </div>
       <div class="card-body">
-        <p>{{ $post->body }}</p>
+        {{-- CKEDITOR PRODUCE DELL'HTML, per gestirlo la var body va gestita con {!! $var !! } --}}
+        <p>{!! $post->body !!}</p>
         <small>Written on  {{ $post->created_at }}</small>
       </div>
     </div>

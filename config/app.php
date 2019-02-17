@@ -167,6 +167,8 @@ return [
          */
          //LARAVEL COLLECTIVE (CREATE ROUTE FORM)
           Collective\Html\HtmlServiceProvider::class,
+          //UNISHARP  - CKEDITOR
+          Unisharp\Ckeditor\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

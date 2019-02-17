@@ -25,6 +25,12 @@
           @yield('content')
          </div>
 
+        {{-- Script default per funzionamento ckEditor --}}
+        {{-- https://github.com/UniSharp/laravel-ckeditor --}}
+        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+        <script>
+          CKEDITOR.replace( 'article-ckeditor' );
+        </script>
 
     </body>
 </html>
