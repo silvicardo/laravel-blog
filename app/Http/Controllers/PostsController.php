@@ -78,6 +78,8 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        //AUTH: campo user_id, recupera l'id dell'utente corrente
+        $post->user_id = auth()->user()->id;
         $post->save(); //salvataggio nel db
 
         //effettuiamo un redirect alla pagina, includendo con
