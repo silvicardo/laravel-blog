@@ -11,7 +11,7 @@
       <div class="card-body">
         {{-- CKEDITOR PRODUCE DELL'HTML, per gestirlo la var body va gestita con {!! $var !! } --}}
         <p>{!! $post->body !!}</p>
-        <small>Written on  {{ $post->created_at }}</small>
+      <small>Written on  {{ $post->created_at }} by {{ $post->user->name }}</small>
       </div>
     </div>
 

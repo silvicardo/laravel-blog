@@ -12,6 +12,9 @@
       <div class="card-header">
           <h3><a href="/posts/{{ $post ->id }}">{{ $post->title }}</a></h3>
       </div>
+      <div class="card-body">
+          <small>Written on  {{ $post->created_at }} by {{ $post->user->name }}</small>
+      </div>
     </div>
 
     @endforeach

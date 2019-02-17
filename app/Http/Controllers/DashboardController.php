@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//visto che esiste la relazione con User per l'id
+use App\User;
+
 class DashboardController extends Controller
 {
     /**
@@ -23,6 +26,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        //VOGLIAMO MOSTRARE TUTTI I POST DELL'UTENTE LOGGATO
+
+        //Otteniamo l'id dell'utente della
+        //sessione corrente
+        $user_id = auth()->user()->id;
+
+        //ricerchiamo l'utente con Model::find(id)
+        $user = User::find($user_id);
+
+        //restituiamo la dashboard con una var posts
+        //corrispondente ai posts dell'utente loggato
+        //$user->posts richiama la funzione posts creata
+        //nello User Model per gestire la relazione
+        return view('dashboard')->with('posts', $user->posts);
     }
 }
