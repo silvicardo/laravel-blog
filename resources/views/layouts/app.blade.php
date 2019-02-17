@@ -24,8 +24,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-
       {{-- peschiamo nella cartella includes la navbar --}}
       @include('includes.navbar')
 
@@ -35,7 +33,7 @@
         {{-- praticamente ciò che viene creato in ogni pagina, il contenuto --}}
         @yield('content')
       </main>
-    </div>
+
     {{-- Script default per funzionamento ckEditor --}}
     {{-- https://github.com/UniSharp/laravel-ckeditor --}}
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>

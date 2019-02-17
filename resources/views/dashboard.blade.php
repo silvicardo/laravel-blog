@@ -12,9 +12,13 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif
 
-                    You are logged in!
+                    @endif
+                    <div>
+                      <a href="/posts/create/" class="btn btn-lg btn-primary">Create Post</a>
+                      <h3 class="mt-5">You are logged in!</h3>  
+                    </div>
+
                 </div>
             </div>
         </div>
