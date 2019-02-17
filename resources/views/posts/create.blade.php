@@ -18,7 +18,7 @@
         {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
 
         {{ Form::label('body', 'Body')}}
-        {{-- dando alla text area id article-ckeditor la "affidiamo" a ckeditor --}}
+        {{-- dando alla text area id article-ckeditor la "affidiamo"  --}}
         {{ Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body'])}}
 
       </div>

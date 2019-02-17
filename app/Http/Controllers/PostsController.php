@@ -107,7 +107,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+      //la stessa azione di show, ma verso la pagina edit
+      $postAtId = Post::find($id);
+
+      return view('posts.edit')->with('post',$postAtId);
     }
 
     /**
@@ -119,7 +122,28 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      //SIMILARMENTE ALLA CREAZIONE abbiamo la request,
+      //ma qui si aggiunge anche l'id del post da modificare
+
+      // validazione con il metodo validate
+      //primo parametro i dati della request
+      //secondo parametro: array parametri
+      $this->validate($request, [
+        'title' => 'required',
+        'body' => 'required'
+      ]);
+
+      //aggiornamento di un post da id
+      //abbinando i relativi dati della request
+      $post = Post::find($id);
+      $post->title = $request->input('title');
+      $post->body = $request->input('body');
+      $post->save(); //salvataggio nel db
+
+      //effettuiamo un redirect alla pagina, includendo con
+      //with un messaggio di riscontro
+      //apparirà nella sezione curata da views/includes/messages.blade.php
+      return redirect('/posts')->with('success','Post updated');
     }
 
     /**
@@ -130,6 +154,13 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      //cancellazione di un post da id
+      $post = Post::find($id);
+      $post->delete();
+
+      //effettuiamo un redirect alla pagina, includendo con
+      //with un messaggio di riscontro
+      //apparirà nella sezione curata da views/includes/messages.blade.php
+      return redirect('/posts')->with('success',"Post at id: $id deleted");
     }
 }
